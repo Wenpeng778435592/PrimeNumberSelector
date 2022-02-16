@@ -6,18 +6,18 @@ using System.Threading.Tasks;
 
 namespace PrimeNumberSelector
 {
-    class PrimeNumberList
+    public class PrimeNumberList
     {
-        internal int MinNumber;
-        internal int MaxNumber;
-        internal List<int> PrimeNumbers;
-        internal PrimeNumberList(int MinNumber, int MaxNumber)
+        public int MinNumber;
+        public int MaxNumber;
+        public List<int> PrimeNumbers;
+        public PrimeNumberList(int MinNumber, int MaxNumber)
         {
             this.MinNumber = MinNumber;
             this.MaxNumber = MaxNumber;
             this.PrimeNumbers = FindPrimeNumber(MinNumber, MaxNumber);
         }
-        internal bool isinputValid(int maxNumber, int minNumber) 
+        public bool isinputValid(int maxNumber, int minNumber) 
             // test if input is valid
         {
             bool validInput = false;
@@ -32,7 +32,7 @@ namespace PrimeNumberSelector
             }
             return validInput;
         }
-        internal List<int> FindPrimeNumber(int minNumber, int maxNumber)
+        public List<int> FindPrimeNumber(int minNumber, int maxNumber)
         {
             var PrimeNumbers = new List<int>();
             if (minNumber < 1 && maxNumber > 0) 
@@ -53,7 +53,7 @@ namespace PrimeNumberSelector
             }
             return PrimeNumbers;
         }
-        internal bool isPrime(int number)
+        public bool isPrime(int number)
         {
             if (number == 1) return false;
             if (number == 2) return true;
