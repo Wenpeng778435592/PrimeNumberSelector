@@ -15,37 +15,33 @@ namespace PrimeNumberSelector
         {
             this.MinNumber = MinNumber;
             this.MaxNumber = MaxNumber;
-            this.PrimeNumbers = FindPrimeNumber(MinNumber, MaxNumber);
+            PrimeNumbers = FindPrimeNumber();
         }
-        public bool isinputValid(int maxNumber, int minNumber) 
+        public bool IsInputValid() 
             // test if input is valid
         {
             bool validInput = false;
-            if (maxNumber > 0 && maxNumber >= minNumber)
+            if (MaxNumber > 0 && MaxNumber >= MinNumber)
             {
                 validInput = true;
             }
             else
             {
                 validInput = false;
-                Console.WriteLine("Invalid range.");
+                Console.WriteLine("Invalid input range.");
             }
             return validInput;
         }
-        public List<int> FindPrimeNumber(int minNumber, int maxNumber)
+        public List<int> FindPrimeNumber()
         {
             var PrimeNumbers = new List<int>();
-            if (minNumber < 1 && maxNumber > 0) 
-                //numbers less than 1 will be ignored
+            if (IsInputValid())
             {
-                minNumber = 1;
-            }
-            if (isinputValid(maxNumber, minNumber))
-            {
-                for (int i = minNumber; i <= maxNumber; i++) 
-                    // find prime number within range
+                MinNumber = TransformMinInput();
+                for (int i = MinNumber; i <= MaxNumber; i++)
+                // find prime number within range
                 {
-                    if (isPrime(i))
+                    if (IsPrime(i))
                     {
                         PrimeNumbers.Add(i);
                     }
@@ -53,7 +49,19 @@ namespace PrimeNumberSelector
             }
             return PrimeNumbers;
         }
-        public bool isPrime(int number)
+
+        public int TransformMinInput()
+        {
+            if (MinNumber < 1)
+            //numbers less than 1 will be ignored
+            {
+                MinNumber = 1;
+            }
+
+            return MinNumber;
+        }
+
+        public bool IsPrime(int number)
         {
             if (number == 1) return false;
             if (number == 2) return true;
