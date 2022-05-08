@@ -1,73 +1,66 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace PrimeNumberSelector
+namespace PrimeNumberSelector.PrimeNumberSelector
 {
     public class PrimeNumberList
     {
         public int MinNumber;
         public int MaxNumber;
         public List<int> PrimeNumbers;
-        public PrimeNumberList(int MinNumber, int MaxNumber)
+
+        public PrimeNumberList(int minNumber, int maxNumber)// ctor for shortcut
         {
-            this.MinNumber = MinNumber;
-            this.MaxNumber = MaxNumber;
+            this.MinNumber = minNumber;
+            this.MaxNumber = maxNumber;
             PrimeNumbers = FindPrimeNumber();
         }
         public bool IsInputValid() 
             // test if input is valid
         {
-            bool validInput = false;
-            if (MaxNumber > 0 && MaxNumber >= MinNumber)
-            {
-                validInput = true;
-            }
-            else
-            {
-                validInput = false;
-                Console.WriteLine("Invalid input range.");
-            }
-            return validInput;
+            //using ternary operators, refactored code
+            Console.WriteLine(MaxNumber > 0 && MaxNumber >= MinNumber
+                ? "valid input."
+                : "Invalid input range.");
+            return MaxNumber > 0 && MaxNumber >= MinNumber;
         }
         public List<int> FindPrimeNumber()
         {
-            var PrimeNumbers = new List<int>();
-            if (IsInputValid())
-            {
-                MinNumber = TransformMinInput();
-                for (int i = MinNumber; i <= MaxNumber; i++)
+            var primeNumber = new List<int>();
+            if (!IsInputValid()) return primeNumber;
+            MinNumber = TransformMinInput();
+            for (var i = MinNumber; i <= MaxNumber; i++)
                 // find prime number within range
+            {
+                if (IsPrime(i))
                 {
-                    if (IsPrime(i))
-                    {
-                        PrimeNumbers.Add(i);
-                    }
+                    primeNumber.Add(i);
                 }
             }
-            return PrimeNumbers;
+            return primeNumber;
+
         }
 
         public int TransformMinInput()
         {
-            if (MinNumber < 1)
+            MinNumber = MinNumber < 1 ? 1 : MinNumber;
             //numbers less than 1 will be ignored
-            {
-                MinNumber = 1;
-            }
-
             return MinNumber;
         }
 
         public bool IsPrime(int number)
         {
-            if (number == 1) return false;
-            if (number == 2) return true;
+            switch (number)
+            {
+                case 1:
+                    return false;
+                case 2:
+                    return true;
+            }
+
             var ceiling = Math.Ceiling(Math.Sqrt(number));
             //the factor of a composite number can be at max the square root of it
-            for (int i = 2; i <= ceiling; ++i)
+            for (var i = 2; i <= ceiling; ++i)
             {
                 if (number % i == 0)
                 {

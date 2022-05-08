@@ -1,6 +1,8 @@
-using Xunit;
 using System;
-namespace PrimeNumberSelector.Tests
+using PrimeNumberSelector.PrimeNumberSelector;
+using Xunit;
+
+namespace PrimeNumberSelector.test.PrimeNumberSelector.Tests
 {
     public class PrimeNumberTest
     {
@@ -24,7 +26,7 @@ namespace PrimeNumberSelector.Tests
         }
 
         [Fact]
-        public void TestTransformMinInputt()
+        public void TestTransformMinInput()
         {
             var primeNumberList1 = new PrimeNumberList(-1000, 2);
             var primeNumberList2 = new PrimeNumberList(2, 150);
